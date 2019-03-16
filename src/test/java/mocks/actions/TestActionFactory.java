@@ -1,8 +1,8 @@
 package mocks.actions;
 
-import com.sdkboilerplate.actions.Action;
-import com.sdkboilerplate.actions.ActionsFactory;
-import com.sdkboilerplate.lib.ApiContext;
+import org.sdkboilerplate.actions.Action;
+import org.sdkboilerplate.actions.ActionsFactory;
+import org.sdkboilerplate.lib.ApiContext;
 
 import java.util.HashMap;
 

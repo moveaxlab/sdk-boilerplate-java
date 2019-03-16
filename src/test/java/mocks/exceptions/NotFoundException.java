@@ -1,6 +1,6 @@
 package mocks.exceptions;
 
-import com.sdkboilerplate.exceptions.SdkHttpException;
+import org.sdkboilerplate.exceptions.SdkHttpException;
 
 public class NotFoundException extends SdkHttpException {
 }

@@ -1,16 +1,14 @@
-import com.sdkboilerplate.actions.Action;
-import com.sdkboilerplate.actions.ActionsFactory;
-import com.sdkboilerplate.exceptions.*;
-import com.sdkboilerplate.http.Headers;
-import com.sdkboilerplate.http.MediaType;
-import com.sdkboilerplate.http.SdkRequest;
-import com.sdkboilerplate.http.SdkResponse;
-import com.sdkboilerplate.http.agents.OkHttpClientAgent;
-import com.sdkboilerplate.http.agents.UserAgentFactory;
-import com.sdkboilerplate.lib.ApiContext;
-import com.sdkboilerplate.lib.FormSerializer;
-import com.sdkboilerplate.lib.JsonDeserializer;
-import com.sdkboilerplate.lib.JsonSerializer;
+import org.sdkboilerplate.actions.ActionsFactory;
+import org.sdkboilerplate.exceptions.*;
+import org.sdkboilerplate.http.Headers;
+import org.sdkboilerplate.http.MediaType;
+import org.sdkboilerplate.http.SdkRequest;
+import org.sdkboilerplate.http.SdkResponse;
+import org.sdkboilerplate.http.agents.OkHttpClientAgent;
+import org.sdkboilerplate.lib.ApiContext;
+import org.sdkboilerplate.lib.FormSerializer;
+import org.sdkboilerplate.lib.JsonDeserializer;
+import org.sdkboilerplate.lib.JsonSerializer;
 
 
 import mocks.actions.TestActionFactory;
@@ -22,7 +20,6 @@ import mocks.objects.*;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

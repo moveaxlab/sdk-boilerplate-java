@@ -1,21 +1,15 @@
 package mocks.actions;
 
-import com.sdkboilerplate.actions.Action;
-import com.sdkboilerplate.exceptions.SdkHttpException;
-import com.sdkboilerplate.exceptions.UnserializableObjectException;
-import com.sdkboilerplate.hooks.FailureHook;
-import com.sdkboilerplate.hooks.PreSendHook;
-import com.sdkboilerplate.hooks.SuccessHook;
-import com.sdkboilerplate.http.Headers;
-import com.sdkboilerplate.http.MediaType;
-import com.sdkboilerplate.objects.SdkBodyType;
-import com.sdkboilerplate.lib.ApiContext;
-import com.sdkboilerplate.validation.Schema;
-import mocks.exceptions.NotFoundException;
+import org.sdkboilerplate.exceptions.SdkHttpException;
+import org.sdkboilerplate.exceptions.UnserializableObjectException;
+import org.sdkboilerplate.http.Headers;
+import org.sdkboilerplate.http.MediaType;
+import org.sdkboilerplate.objects.SdkBodyType;
+import org.sdkboilerplate.lib.ApiContext;
+import org.sdkboilerplate.validation.Schema;
 import mocks.exceptions.ValidationException;
 import mocks.objects.TestUserCreation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TestCreateUserAction extends TestAction {

@@ -1,7 +1,7 @@
 package mocks.objects;
 
-import com.sdkboilerplate.objects.SdkObject;
-import com.sdkboilerplate.validation.Schema;
+import org.sdkboilerplate.objects.SdkObject;
+import org.sdkboilerplate.validation.Schema;
 
 public class TestUserCreation extends SdkObject {
     public String name;
