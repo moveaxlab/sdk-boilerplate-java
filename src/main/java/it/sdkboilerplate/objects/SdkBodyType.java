@@ -1,6 +1,6 @@
-package org.sdkboilerplate.objects;
+package it.sdkboilerplate.objects;
 
-import org.sdkboilerplate.validation.Validatable;
+import it.sdkboilerplate.validation.Validatable;
 
 public abstract class SdkBodyType implements Validatable {
 }

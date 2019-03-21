@@ -1,4 +1,4 @@
-package org.sdkboilerplate.hooks;
+package it.sdkboilerplate.hooks;
 
 public interface Hook {
     void run();

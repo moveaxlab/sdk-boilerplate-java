@@ -1,6 +1,6 @@
-package org.sdkboilerplate.http.agents;
+package it.sdkboilerplate.http.agents;
 
-import org.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.lib.ApiContext;
 
 public class UserAgentFactory {
     public static UserAgent make(ApiContext ctx) {

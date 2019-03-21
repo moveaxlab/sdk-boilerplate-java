@@ -1,7 +1,7 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
-import org.sdkboilerplate.exceptions.UnserializableObjectException;
-import org.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.exceptions.UnserializableObjectException;
+import it.sdkboilerplate.objects.SdkBodyType;
 
 import java.lang.reflect.Field;
 

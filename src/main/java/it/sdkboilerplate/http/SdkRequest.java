@@ -1,4 +1,4 @@
-package org.sdkboilerplate.http;
+package it.sdkboilerplate.http;
 
 import java.util.HashMap;
 

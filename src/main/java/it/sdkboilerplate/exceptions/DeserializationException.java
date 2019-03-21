@@ -1,4 +1,4 @@
-package org.sdkboilerplate.exceptions;
+package it.sdkboilerplate.exceptions;
 
 public class DeserializationException extends SdkException {
     public DeserializationException(String message){

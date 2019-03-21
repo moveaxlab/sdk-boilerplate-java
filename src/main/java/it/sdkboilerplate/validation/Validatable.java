@@ -1,6 +1,6 @@
-package org.sdkboilerplate.validation;
+package it.sdkboilerplate.validation;
 
-import org.sdkboilerplate.exceptions.JsonSerializationException;
+import it.sdkboilerplate.exceptions.JsonSerializationException;
 
 public interface Validatable {
     Schema getSchema() throws JsonSerializationException;

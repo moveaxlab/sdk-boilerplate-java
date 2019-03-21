@@ -1,4 +1,4 @@
-package org.sdkboilerplate.exceptions;
+package it.sdkboilerplate.exceptions;
 
 /**
  * Thrown when an SdkObject does not define a validation schema

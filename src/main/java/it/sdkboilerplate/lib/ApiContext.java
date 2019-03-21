@@ -1,7 +1,7 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
-import org.sdkboilerplate.cache.CacheAdapter;
-import org.sdkboilerplate.exceptions.ConfigurationException;
+import it.sdkboilerplate.cache.CacheAdapter;
+import it.sdkboilerplate.exceptions.ConfigurationException;
 
 import java.util.HashMap;
 

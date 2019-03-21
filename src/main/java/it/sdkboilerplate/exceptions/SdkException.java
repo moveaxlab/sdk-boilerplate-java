@@ -1,4 +1,4 @@
-package org.sdkboilerplate.exceptions;
+package it.sdkboilerplate.exceptions;
 
 /**
  * Sdk Generic Exception Base Class

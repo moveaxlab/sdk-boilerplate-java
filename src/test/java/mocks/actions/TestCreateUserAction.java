@@ -1,12 +1,12 @@
 package mocks.actions;
 
-import org.sdkboilerplate.exceptions.SdkHttpException;
-import org.sdkboilerplate.exceptions.UnserializableObjectException;
-import org.sdkboilerplate.http.Headers;
-import org.sdkboilerplate.http.MediaType;
-import org.sdkboilerplate.objects.SdkBodyType;
-import org.sdkboilerplate.lib.ApiContext;
-import org.sdkboilerplate.validation.Schema;
+import it.sdkboilerplate.exceptions.SdkHttpException;
+import it.sdkboilerplate.exceptions.UnserializableObjectException;
+import it.sdkboilerplate.http.Headers;
+import it.sdkboilerplate.http.MediaType;
+import it.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.validation.Schema;
 import mocks.exceptions.ValidationException;
 import mocks.objects.TestUserCreation;
 

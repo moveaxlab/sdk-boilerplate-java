@@ -1,10 +1,9 @@
-package org.sdkboilerplate.callbacks;
+package it.sdkboilerplate.callbacks;
 
-import org.sdkboilerplate.exceptions.*;
-import org.sdkboilerplate.exceptions.*;
-import org.sdkboilerplate.lib.ApiContext;
-import org.sdkboilerplate.lib.JsonDeserializer;
-import org.sdkboilerplate.objects.SdkObject;
+import it.sdkboilerplate.exceptions.*;
+import it.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.lib.JsonDeserializer;
+import it.sdkboilerplate.objects.SdkObject;
 
 import java.util.HashMap;
 

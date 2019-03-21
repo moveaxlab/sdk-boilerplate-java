@@ -1,4 +1,4 @@
-package org.sdkboilerplate.validation;
+package it.sdkboilerplate.validation;
 
 public class Validator {
 }

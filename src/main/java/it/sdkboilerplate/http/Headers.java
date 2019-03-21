@@ -1,4 +1,4 @@
-package org.sdkboilerplate.http;
+package it.sdkboilerplate.http;
 
 public class Headers {
     public final static String CONTENT_TYPE = "Content-Type";

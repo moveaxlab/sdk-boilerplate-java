@@ -1,4 +1,4 @@
-package org.sdkboilerplate.cache;
+package it.sdkboilerplate.cache;
 
 public interface CacheInterface {
     String get(String key);

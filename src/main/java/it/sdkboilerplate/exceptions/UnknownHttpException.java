@@ -1,4 +1,4 @@
-package org.sdkboilerplate.exceptions;
+package it.sdkboilerplate.exceptions;
 
 /**
  * Thrown when a response has an error code which is undefined

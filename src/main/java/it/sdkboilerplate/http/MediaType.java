@@ -1,4 +1,4 @@
-package org.sdkboilerplate.http;
+package it.sdkboilerplate.http;
 
 public class MediaType {
     public final static String APPLICATION_JSON = "application/json";

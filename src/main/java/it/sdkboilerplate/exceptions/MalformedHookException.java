@@ -1,4 +1,4 @@
-package org.sdkboilerplate.exceptions;
+package it.sdkboilerplate.exceptions;
 
 /**
  * Exception thrown on malformed Hook subclasses definitions

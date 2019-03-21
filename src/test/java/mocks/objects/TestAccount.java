@@ -1,7 +1,7 @@
 package mocks.objects;
 
-import org.sdkboilerplate.objects.SdkObject;
-import org.sdkboilerplate.validation.Schema;
+import it.sdkboilerplate.objects.SdkObject;
+import it.sdkboilerplate.validation.Schema;
 
 public class TestAccount extends SdkObject {
     private String name;

@@ -1,7 +1,7 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
-import org.sdkboilerplate.exceptions.UnknownContentTypeException;
-import org.sdkboilerplate.http.MediaType;
+import it.sdkboilerplate.exceptions.UnknownContentTypeException;
+import it.sdkboilerplate.http.MediaType;
 
 public class DeserializerFactory {
     public static Deserializer make(String mediaType) throws UnknownContentTypeException {

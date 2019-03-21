@@ -1,14 +1,14 @@
-import org.sdkboilerplate.actions.ActionsFactory;
-import org.sdkboilerplate.exceptions.*;
-import org.sdkboilerplate.http.Headers;
-import org.sdkboilerplate.http.MediaType;
-import org.sdkboilerplate.http.SdkRequest;
-import org.sdkboilerplate.http.SdkResponse;
-import org.sdkboilerplate.http.agents.OkHttpClientAgent;
-import org.sdkboilerplate.lib.ApiContext;
-import org.sdkboilerplate.lib.FormSerializer;
-import org.sdkboilerplate.lib.JsonDeserializer;
-import org.sdkboilerplate.lib.JsonSerializer;
+import it.sdkboilerplate.actions.ActionsFactory;
+import it.sdkboilerplate.exceptions.*;
+import it.sdkboilerplate.http.Headers;
+import it.sdkboilerplate.http.MediaType;
+import it.sdkboilerplate.http.SdkRequest;
+import it.sdkboilerplate.http.SdkResponse;
+import it.sdkboilerplate.http.agents.OkHttpClientAgent;
+import it.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.lib.FormSerializer;
+import it.sdkboilerplate.lib.JsonDeserializer;
+import it.sdkboilerplate.lib.JsonSerializer;
 
 
 import mocks.actions.TestActionFactory;

@@ -1,12 +1,12 @@
-package org.sdkboilerplate.http;
+package it.sdkboilerplate.http;
 
-import org.sdkboilerplate.exceptions.DeserializationException;
-import org.sdkboilerplate.exceptions.UnknownBodyTypeException;
-import org.sdkboilerplate.exceptions.UnknownContentTypeException;
-import org.sdkboilerplate.lib.Deserializer;
-import org.sdkboilerplate.lib.DeserializerFactory;
+import it.sdkboilerplate.exceptions.DeserializationException;
+import it.sdkboilerplate.exceptions.UnknownBodyTypeException;
+import it.sdkboilerplate.exceptions.UnknownContentTypeException;
+import it.sdkboilerplate.lib.Deserializer;
+import it.sdkboilerplate.lib.DeserializerFactory;
 
-import org.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.objects.SdkBodyType;
 
 import java.util.HashMap;
 

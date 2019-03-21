@@ -1,6 +1,6 @@
-package org.sdkboilerplate.objects;
+package it.sdkboilerplate.objects;
 
-import org.sdkboilerplate.exceptions.UnserializableObjectException;
+import it.sdkboilerplate.exceptions.UnserializableObjectException;
 
 
 import java.util.ArrayList;

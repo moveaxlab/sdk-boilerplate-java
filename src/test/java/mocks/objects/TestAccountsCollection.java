@@ -1,8 +1,8 @@
 package mocks.objects;
 
-import org.sdkboilerplate.objects.SdkBodyType;
-import org.sdkboilerplate.objects.SdkCollection;
-import org.sdkboilerplate.validation.Schema;
+import it.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.objects.SdkCollection;
+import it.sdkboilerplate.validation.Schema;
 
 import java.util.ArrayList;
 

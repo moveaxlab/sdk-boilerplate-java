@@ -1,10 +1,10 @@
 package mocks.actions;
 
-import org.sdkboilerplate.exceptions.SdkHttpException;
+import it.sdkboilerplate.exceptions.SdkHttpException;
 
-import org.sdkboilerplate.objects.SdkBodyType;
-import org.sdkboilerplate.lib.ApiContext;
-import org.sdkboilerplate.validation.Schema;
+import it.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.validation.Schema;
 import mocks.exceptions.NotFoundException;
 import mocks.objects.TestUserRetrieval;
 

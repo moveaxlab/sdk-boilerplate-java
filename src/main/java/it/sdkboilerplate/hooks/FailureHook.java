@@ -1,9 +1,9 @@
-package org.sdkboilerplate.hooks;
+package it.sdkboilerplate.hooks;
 
-import org.sdkboilerplate.exceptions.SdkHttpException;
-import org.sdkboilerplate.http.SdkRequest;
-import org.sdkboilerplate.http.SdkResponse;
-import org.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.exceptions.SdkHttpException;
+import it.sdkboilerplate.http.SdkRequest;
+import it.sdkboilerplate.http.SdkResponse;
+import it.sdkboilerplate.lib.ApiContext;
 
 /**
  * Class FailureHook implementing Hook interface. Failure Hook instances are run if the http sdkRequest returns an

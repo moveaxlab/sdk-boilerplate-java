@@ -1,7 +1,7 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
-import org.sdkboilerplate.exceptions.UnserializableObjectException;
-import org.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.exceptions.UnserializableObjectException;
+import it.sdkboilerplate.objects.SdkBodyType;
 
 /**
  * Interface which allows the serialization of Sdk objects into raw strings

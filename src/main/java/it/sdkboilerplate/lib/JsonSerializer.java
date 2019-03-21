@@ -1,12 +1,12 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.sdkboilerplate.exceptions.UnserializableObjectException;
-import org.sdkboilerplate.objects.SdkBodyType;
-import org.sdkboilerplate.objects.SdkCollection;
-import org.sdkboilerplate.objects.SdkObject;
+import it.sdkboilerplate.exceptions.UnserializableObjectException;
+import it.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.objects.SdkCollection;
+import it.sdkboilerplate.objects.SdkObject;
 
 
 @SuppressWarnings("unchecked")

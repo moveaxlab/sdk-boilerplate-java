@@ -1,10 +1,10 @@
 package mocks.actions;
 
-import org.sdkboilerplate.actions.Action;
-import org.sdkboilerplate.hooks.FailureHook;
-import org.sdkboilerplate.hooks.PreSendHook;
-import org.sdkboilerplate.hooks.SuccessHook;
-import org.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.actions.Action;
+import it.sdkboilerplate.hooks.FailureHook;
+import it.sdkboilerplate.hooks.PreSendHook;
+import it.sdkboilerplate.hooks.SuccessHook;
+import it.sdkboilerplate.lib.ApiContext;
 
 import java.util.ArrayList;
 

@@ -1,13 +1,13 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
-import org.sdkboilerplate.exceptions.DeserializationException;
-import org.sdkboilerplate.exceptions.JsonSerializationException;
-import org.sdkboilerplate.exceptions.UnknownBodyTypeException;
+import it.sdkboilerplate.exceptions.DeserializationException;
+import it.sdkboilerplate.exceptions.JsonSerializationException;
+import it.sdkboilerplate.exceptions.UnknownBodyTypeException;
 
-import org.sdkboilerplate.objects.SdkBodyType;
-import org.sdkboilerplate.objects.SdkCollection;
-import org.sdkboilerplate.objects.SdkObject;
-import org.sdkboilerplate.utils.Json;
+import it.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.objects.SdkCollection;
+import it.sdkboilerplate.objects.SdkObject;
+import it.sdkboilerplate.utils.Json;
 import org.apache.commons.text.CaseUtils;
 
 import java.lang.reflect.Constructor;

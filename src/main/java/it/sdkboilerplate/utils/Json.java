@@ -1,8 +1,8 @@
-package org.sdkboilerplate.utils;
+package it.sdkboilerplate.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.sdkboilerplate.exceptions.JsonSerializationException;
+import it.sdkboilerplate.exceptions.JsonSerializationException;
 
 import java.io.IOException;
 

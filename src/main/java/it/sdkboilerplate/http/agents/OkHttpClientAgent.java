@@ -1,12 +1,11 @@
-package org.sdkboilerplate.http.agents;
+package it.sdkboilerplate.http.agents;
 
-import org.sdkboilerplate.exceptions.*;
-import org.sdkboilerplate.http.Headers;
-import org.sdkboilerplate.http.SdkRequest;
-import org.sdkboilerplate.http.SdkResponse;
+import it.sdkboilerplate.exceptions.*;
+import it.sdkboilerplate.http.Headers;
+import it.sdkboilerplate.http.SdkRequest;
+import it.sdkboilerplate.http.SdkResponse;
 
 import okhttp3.*;
-import org.sdkboilerplate.exceptions.*;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -144,9 +143,9 @@ public class OkHttpClientAgent extends UserAgent {
         String requestBody = sdkRequest.getBody();
         if (requestBody == null) return RequestBody.create(null, new byte[0]);
         switch (contentTypeHeader) {
-            case org.sdkboilerplate.http.MediaType.APPLICATION_JSON:
+            case it.sdkboilerplate.http.MediaType.APPLICATION_JSON:
                 return RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
-            case org.sdkboilerplate.http.MediaType.APPLICATION_FORM:
+            case it.sdkboilerplate.http.MediaType.APPLICATION_FORM:
                 return RequestBody.create(okhttp3.MediaType.parse("application/x-www-form-urlencoded"), requestBody);
             default:
                 throw new UnknownContentTypeException();

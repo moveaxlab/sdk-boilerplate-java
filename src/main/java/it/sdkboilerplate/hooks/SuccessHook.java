@@ -1,8 +1,8 @@
-package org.sdkboilerplate.hooks;
+package it.sdkboilerplate.hooks;
 
-import org.sdkboilerplate.http.SdkRequest;
-import org.sdkboilerplate.http.SdkResponse;
-import org.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.http.SdkRequest;
+import it.sdkboilerplate.http.SdkResponse;
+import it.sdkboilerplate.lib.ApiContext;
 
 /**
  * SuccessHook abstract class implementing Hook interface. SuccessHook instances are constructed with the sdkRequest and

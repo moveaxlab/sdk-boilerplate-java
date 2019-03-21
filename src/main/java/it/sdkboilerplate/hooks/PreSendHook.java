@@ -1,7 +1,7 @@
-package org.sdkboilerplate.hooks;
+package it.sdkboilerplate.hooks;
 
-import org.sdkboilerplate.http.SdkRequest;
-import org.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.http.SdkRequest;
+import it.sdkboilerplate.lib.ApiContext;
 
 /**
  * PreSend hook abstract class implementing Hook interface. PreSend Hook instances are constructed with the Http sdkRequest

@@ -1,8 +1,8 @@
-package org.sdkboilerplate.lib;
+package it.sdkboilerplate.lib;
 
-import org.sdkboilerplate.exceptions.DeserializationException;
-import org.sdkboilerplate.exceptions.UnknownBodyTypeException;
-import org.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.exceptions.DeserializationException;
+import it.sdkboilerplate.exceptions.UnknownBodyTypeException;
+import it.sdkboilerplate.objects.SdkBodyType;
 
 /**
  * Interface which allows the deserialization of raw serialized strings into SdkType instances

@@ -1,4 +1,4 @@
-package org.sdkboilerplate.exceptions;
+package it.sdkboilerplate.exceptions;
 
 /**
  * Thrown when there are ReflectiveOperation errors computing serialization of an sdkObject

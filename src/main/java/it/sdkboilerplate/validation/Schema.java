@@ -1,7 +1,7 @@
-package org.sdkboilerplate.validation;
+package it.sdkboilerplate.validation;
 
-import org.sdkboilerplate.exceptions.JsonSerializationException;
-import org.sdkboilerplate.utils.Json;
+import it.sdkboilerplate.exceptions.JsonSerializationException;
+import it.sdkboilerplate.utils.Json;
 
 import java.util.HashMap;
 

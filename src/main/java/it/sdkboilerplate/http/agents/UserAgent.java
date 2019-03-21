@@ -1,8 +1,8 @@
-package org.sdkboilerplate.http.agents;
+package it.sdkboilerplate.http.agents;
 
-import org.sdkboilerplate.exceptions.SdkException;
-import org.sdkboilerplate.http.SdkRequest;
-import org.sdkboilerplate.http.SdkResponse;
+import it.sdkboilerplate.exceptions.SdkException;
+import it.sdkboilerplate.http.SdkRequest;
+import it.sdkboilerplate.http.SdkResponse;
 
 import java.util.HashMap;
 

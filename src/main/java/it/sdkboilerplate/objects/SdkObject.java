@@ -1,4 +1,4 @@
-package org.sdkboilerplate.objects;
+package it.sdkboilerplate.objects;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

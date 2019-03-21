@@ -1,7 +1,7 @@
-package org.sdkboilerplate.actions;
+package it.sdkboilerplate.actions;
 
-import org.sdkboilerplate.exceptions.UndefinedActionException;
-import org.sdkboilerplate.lib.ApiContext;
+import it.sdkboilerplate.exceptions.UndefinedActionException;
+import it.sdkboilerplate.lib.ApiContext;
 
 
 import java.lang.reflect.Constructor;

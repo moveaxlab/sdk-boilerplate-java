@@ -1,8 +1,8 @@
 package mocks.objects;
 
-import org.sdkboilerplate.objects.SdkBodyType;
-import org.sdkboilerplate.objects.SdkObject;
-import org.sdkboilerplate.validation.Schema;
+import it.sdkboilerplate.objects.SdkBodyType;
+import it.sdkboilerplate.objects.SdkObject;
+import it.sdkboilerplate.validation.Schema;
 
 import java.util.HashMap;
 
