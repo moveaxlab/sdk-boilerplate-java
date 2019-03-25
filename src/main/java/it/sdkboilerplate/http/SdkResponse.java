@@ -34,7 +34,7 @@ public class SdkResponse {
     }
 
     /**
-     * @return True iff the response status code is is 200<= <=299
+     * @return True iff the response status code is in the range 200-299
      */
     public boolean isFailed() {
         return 200 > this.statusCode || this.statusCode > 299;
@@ -44,8 +44,11 @@ public class SdkResponse {
      * Formats the raw response body into the appropriate object class
      *
      * @param sdkObjectClass Class of the sdkObject
+     * @param <T> type of the parsed object
      * @return SdkObject instance
      * @throws UnknownContentTypeException When the response content type is not handled by the sdk
+     * @throws UnknownBodyTypeException When then type of the class is malformed or unknown
+     * @throws DeserializationException On response body de-serialization errors
      */
     public <T extends SdkBodyType> T format(Class<? extends SdkBodyType> sdkObjectClass) throws UnknownContentTypeException, UnknownBodyTypeException, DeserializationException {
         if (sdkObjectClass == null) {

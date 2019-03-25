@@ -26,6 +26,8 @@ public abstract class CallbackHandler {
      *
      * @param headers The headers of the request
      * @param rawBody The raw request body
+     * @throws CallbackParsingException On callback request parsing errors
+     * @throws CallbackVerificationException On any error during the signature verification
      */
     public abstract void verify(HashMap<String, String> headers, byte[] rawBody) throws CallbackParsingException, CallbackVerificationException;
 
@@ -42,6 +44,10 @@ public abstract class CallbackHandler {
      * @param headers Headers of the callback request
      * @param rawBody RawBody of the callback request
      * @return SdkObject instance mapped with the callback namespace
+     * @throws DeserializationException On errors de-serializing the object contained in the callback request body
+     * @throws CallbackParsingException On callback request parsing errors
+     * @throws CallbackVerificationException On any error during the signature verification
+     * @throws UnknownCallbackTypeException When the callback namespace extracted from the body is undefined
      */
     public SdkObject parse(HashMap<String, String> headers, byte[] rawBody)
             throws UnknownCallbackTypeException, CallbackVerificationException, CallbackParsingException, DeserializationException {

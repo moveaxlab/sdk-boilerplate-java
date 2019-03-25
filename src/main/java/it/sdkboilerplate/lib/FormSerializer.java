@@ -11,7 +11,7 @@ public class FormSerializer implements Serializer {
      * Serializes an SdkObject into its form-urlencoded representation
      *
      * @param bodyObject SdkObject to be serialized
-     * @return String in form-urlencoded format (i.e key1=value1&key2=value2)
+     * @return String in form-urlencoded format
      */
     public String serialize(SdkBodyType bodyObject) throws UnserializableObjectException {
         try {

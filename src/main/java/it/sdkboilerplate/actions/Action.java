@@ -172,7 +172,7 @@ public abstract class Action {
      * @param sdkResponse SdkResponse object
      * @return Error Key
      */
-    public String getExceptionKey(SdkResponse sdkResponse) throws DeserializationException {
+    public String getExceptionKey(SdkResponse sdkResponse) {
         return sdkResponse.getStatusCode().toString();
     }
 
@@ -183,15 +183,13 @@ public abstract class Action {
      * @return SdkHttpException class to be thrown
      */
     private Class<? extends SdkHttpException> getException(SdkResponse sdkResponse) throws UnknownHttpException {
-        try {
-            Class<? extends SdkHttpException> exceptionClass = this.getErrors().get(this.getExceptionKey(sdkResponse));
-            if (exceptionClass == null) {
-                throw new UnknownHttpException();
-            }
-            return exceptionClass;
-        } catch (DeserializationException e) {
+
+        Class<? extends SdkHttpException> exceptionClass = this.getErrors().get(this.getExceptionKey(sdkResponse));
+        if (exceptionClass == null) {
             throw new UnknownHttpException();
         }
+        return exceptionClass;
+
     }
 
     /**
@@ -281,6 +279,9 @@ public abstract class Action {
      * Compiles and runs the http request
      *
      * @return The SdkObject representing the response body (null if there is no response body)
+     * @throws SdkException On request build | send errors
+     * @throws SdkHttpException When a failure response is received
+     * @throws ReflectiveOperationException On errors in parsing responses
      */
     public SdkBodyType run() throws SdkException, SdkHttpException, ReflectiveOperationException {
         // Serialize the request body and construct the SdkRequestObject

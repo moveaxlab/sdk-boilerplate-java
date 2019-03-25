@@ -10,10 +10,10 @@ public abstract class SdkObject  extends SdkBodyType {
     }
 
     /**
-     * Helper method to convert an SdkObject into an HashMap<String, Object></String,>
+     * Helper method to convert an SdkObject into an HashMap
      *
      * @return HashMap representation of the sdk object
-     * @throws ReflectiveOperationException On object malformed
+     * @throws ReflectiveOperationException When the object is malformed
      */
     public HashMap<String, Object> toHashMap() throws ReflectiveOperationException {
         HashMap<String, Object> serialization = new HashMap<>();
