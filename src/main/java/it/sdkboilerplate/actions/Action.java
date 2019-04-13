@@ -279,8 +279,8 @@ public abstract class Action {
      * Compiles and runs the http request
      *
      * @return The SdkObject representing the response body (null if there is no response body)
-     * @throws SdkException On request build | send errors
-     * @throws SdkHttpException When a failure response is received
+     * @throws SdkException                 On request build | send errors
+     * @throws SdkHttpException             When a failure response is received
      * @throws ReflectiveOperationException On errors in parsing responses
      */
     public SdkBodyType run() throws SdkException, SdkHttpException, ReflectiveOperationException {
