@@ -113,6 +113,8 @@
         <java.version>6</java.version>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.testSource>1.6</maven.compiler.testSource>
+        <maven.compiler.testTarget>1.6</maven.compiler.testTarget>
     </properties>
     <dependencies>
         <dependency>
