@@ -2,7 +2,6 @@ package it.sdkboilerplate.objects;
 
 import it.sdkboilerplate.exceptions.UnserializableObjectException;
 
-
 import java.util.ArrayList;
 
 
@@ -23,21 +22,17 @@ public abstract class SdkCollection<E> extends SdkBodyType {
     }
 
     public ArrayList<E> toArrayList() throws UnserializableObjectException {
-        ArrayList<E> elements = new ArrayList<>();
-        try {
-            for (E element : this.elements) {
-                if (element instanceof SdkObject) {
-                    elements.add((E) ((SdkObject) element).toHashMap());
-                } else if (element instanceof SdkCollection) {
-                    elements.add((E) ((SdkCollection) element).toArrayList());
-                } else {
-                    elements.add(element);
-                }
+        ArrayList<E> elements = new ArrayList();
+        for (E element : this.elements) {
+            if (element instanceof SdkObject) {
+                elements.add((E) ((SdkObject) element).toHashMap());
+            } else if (element instanceof SdkCollection) {
+                elements.add((E) ((SdkCollection) element).toArrayList());
+            } else {
+                elements.add(element);
             }
-            return elements;
-        } catch (ReflectiveOperationException e) {
-            throw new UnserializableObjectException();
         }
+        return elements;
     }
 
 

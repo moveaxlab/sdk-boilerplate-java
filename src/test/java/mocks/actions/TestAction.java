@@ -15,17 +15,17 @@ public abstract class TestAction extends Action {
 
     @Override
     public ArrayList<Class<? extends FailureHook>> getFailureHooks() {
-        return new ArrayList<>();
+        return new ArrayList();
     }
 
     @Override
     public ArrayList<Class<? extends SuccessHook>> getSuccessHooks() {
-        return new ArrayList<>();
+        return new ArrayList();
     }
 
     @Override
     public ArrayList<Class<? extends PreSendHook>> getPreSendHooks() {
-        return new ArrayList<>();
+        return new ArrayList();
     }
 
 }

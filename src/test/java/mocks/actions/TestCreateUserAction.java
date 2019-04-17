@@ -45,20 +45,20 @@ public class TestCreateUserAction extends TestAction {
 
     @Override
     public HashMap<String, Class<? extends SdkHttpException>> getErrors() {
-        HashMap<String, Class<? extends SdkHttpException>> errors = new HashMap<>();
+        HashMap<String, Class<? extends SdkHttpException>> errors = new HashMap();
         errors.put("422", ValidationException.class);
         return errors;
     }
 
     @Override
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> headers = new HashMap();
         headers.put(Headers.CONTENT_TYPE, MediaType.APPLICATION_JSON);
         headers.put(Headers.ACCEPT, MediaType.APPLICATION_JSON);
         return headers;
     }
 
-    public void setUser(TestUserCreation userCreation) throws UnserializableObjectException, ReflectiveOperationException {
+    public void setUser(TestUserCreation userCreation) throws UnserializableObjectException {
         this.setRequestBody(userCreation);
     }
 

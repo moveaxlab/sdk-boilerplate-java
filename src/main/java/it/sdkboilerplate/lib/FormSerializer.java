@@ -24,7 +24,7 @@ public class FormSerializer implements Serializer {
                 }
             }
             return urlEncode;
-        } catch (ReflectiveOperationException e) {
+        } catch (IllegalAccessException e) {
             throw new UnserializableObjectException();
         }
     }

@@ -53,7 +53,7 @@ public class TestUserRetrieval extends SdkObject {
 
 
     public static HashMap<String, Class<? extends SdkBodyType>> getSubObjects() {
-        HashMap<String, Class<? extends SdkBodyType>> subObjects = new HashMap<>();
+        HashMap<String, Class<? extends SdkBodyType>> subObjects = new HashMap();
         subObjects.put("contact", TestContactRetrieval.class);
         subObjects.put("accounts", TestAccountsCollection.class);
         return subObjects;

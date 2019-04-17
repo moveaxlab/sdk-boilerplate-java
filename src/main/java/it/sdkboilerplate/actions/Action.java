@@ -20,6 +20,7 @@ import it.sdkboilerplate.validation.Schema;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +57,7 @@ public abstract class Action {
         this.queryParameters = queryParameters;
     }
 
-    public void setRequestBody(SdkBodyType requestBody) throws UnserializableObjectException, ReflectiveOperationException {
+    public void setRequestBody(SdkBodyType requestBody) throws UnserializableObjectException {
         this.validateRequestBody(requestBody);
         this.requestBody = requestBody;
     }
@@ -126,19 +127,27 @@ public abstract class Action {
      *
      * @param body Body of the request
      */
-    private void validateRequestBody(SdkBodyType body) throws UnserializableObjectException, ReflectiveOperationException {
+    private void validateRequestBody(SdkBodyType body) throws UnserializableObjectException {
         Class<? extends SdkBodyType> requestBodyClass = this.getRequestBodyClass();
-        Method getSchema = requestBodyClass.getMethod("getSchema");
-        Method serializationMethod = null;
-        if (body instanceof SdkObject) {
-            serializationMethod = requestBodyClass.getMethod("toHashMap");
-        } else if (body instanceof SdkCollection) {
-            serializationMethod = requestBodyClass.getMethod("toArray");
-        } else {
-            throw new UnserializableObjectException();
-        }
+        try {
+            Method getSchema = requestBodyClass.getMethod("getSchema");
+            Method serializationMethod = null;
+            if (body instanceof SdkObject) {
+                serializationMethod = requestBodyClass.getMethod("toHashMap");
+            } else if (body instanceof SdkCollection) {
+                serializationMethod = requestBodyClass.getMethod("toArray");
+            } else {
+                throw new UnserializableObjectException();
+            }
 
-        this.validate(serializationMethod.invoke(body), (Schema) getSchema.invoke(body));
+            this.validate(serializationMethod.invoke(body), (Schema) getSchema.invoke(body));
+        } catch (NoSuchMethodException exc) {
+            throw new UnserializableObjectException(exc.getMessage());
+        } catch (IllegalAccessException exc) {
+            throw new UnserializableObjectException(exc.getMessage());
+        } catch (InvocationTargetException exc) {
+            throw new UnserializableObjectException(exc.getMessage());
+        }
     }
 
     /**
@@ -221,20 +230,26 @@ public abstract class Action {
      */
     private void runPreSendHooks(SdkRequest request) throws SdkException {
         try {
-            ArrayList<Hook> hooks = new ArrayList<>();
+            ArrayList<Hook> hooks = new ArrayList();
             for (Class<? extends PreSendHook> preSendHookClass : this.getPreSendHooks()) {
                 Constructor<? extends PreSendHook> hookConstructor = preSendHookClass.getConstructor(ApiContext.class, SdkRequest.class);
                 hooks.add(hookConstructor.newInstance(this.ctx, request));
             }
             this.runHooks(hooks);
-        } catch (ReflectiveOperationException e) {
-            throw new MalformedHookException();
+        } catch (IllegalAccessException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (NoSuchMethodException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (InstantiationException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (InvocationTargetException e) {
+            throw new MalformedHookException(e.getMessage());
         }
     }
 
     private void runFailureHooks(SdkRequest request, SdkResponse response, SdkException exception) throws SdkException {
         try {
-            ArrayList<Hook> hooks = new ArrayList<>();
+            ArrayList<Hook> hooks = new ArrayList();
             for (Class<? extends FailureHook> failureHookClass : this.getFailureHooks()) {
                 Constructor<? extends FailureHook> hookConstructor = failureHookClass.getConstructor(
                         ApiContext.class,
@@ -244,21 +259,33 @@ public abstract class Action {
                 hooks.add(hookConstructor.newInstance(this.ctx, request, response, exception));
             }
             this.runHooks(hooks);
-        } catch (ReflectiveOperationException e) {
-            throw new MalformedHookException();
+        } catch (IllegalAccessException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (NoSuchMethodException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (InstantiationException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (InvocationTargetException e) {
+            throw new MalformedHookException(e.getMessage());
         }
     }
 
     private void runSuccessHooks(SdkRequest request, SdkResponse response) throws SdkException {
         try {
-            ArrayList<Hook> hooks = new ArrayList<>();
+            ArrayList<Hook> hooks = new ArrayList();
             for (Class<? extends SuccessHook> successHookClass : this.getSuccessHooks()) {
                 Constructor<? extends SuccessHook> hookConstructor = successHookClass.getConstructor(ApiContext.class, SdkRequest.class, SdkResponse.class);
                 hooks.add(hookConstructor.newInstance(this.ctx, request, response));
             }
             this.runHooks(hooks);
-        } catch (ReflectiveOperationException e) {
-            throw new MalformedHookException();
+        } catch (IllegalAccessException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (NoSuchMethodException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (InstantiationException e) {
+            throw new MalformedHookException(e.getMessage());
+        } catch (InvocationTargetException e) {
+            throw new MalformedHookException(e.getMessage());
         }
     }
 
@@ -279,11 +306,10 @@ public abstract class Action {
      * Compiles and runs the http request
      *
      * @return The SdkObject representing the response body (null if there is no response body)
-     * @throws SdkException                 On request build | send errors
-     * @throws SdkHttpException             When a failure response is received
-     * @throws ReflectiveOperationException On errors in parsing responses
+     * @throws SdkException     On request build | send errors
+     * @throws SdkHttpException When a failure response is received
      */
-    public SdkBodyType run() throws SdkException, SdkHttpException, ReflectiveOperationException {
+    public SdkBodyType run() throws SdkException, SdkHttpException {
         // Serialize the request body and construct the SdkRequestObject
         HashMap<String, String> headers = this.getHeaders();
 
@@ -297,12 +323,22 @@ public abstract class Action {
         SdkResponse response = agent.send(request);
 
         if (response.isFailed()) {
-            // If the response has a status code not in 200-299, runs the failure hooks and throws the appropriate defined exception
-            Class<? extends SdkHttpException> exceptionClass = this.getException(response);
-            SdkHttpException exceptionInstance = exceptionClass.getConstructor().newInstance();
-            // Run the failure hooks and throw the exception
-            this.runFailureHooks(request, response, exceptionInstance);
-            throw exceptionInstance;
+            try {
+                // If the response has a status code not in 200-299, runs the failure hooks and throws the appropriate defined exception
+                Class<? extends SdkHttpException> exceptionClass = this.getException(response);
+                SdkHttpException exceptionInstance = exceptionClass.getConstructor().newInstance();
+                // Run the failure hooks and throw the exception
+                this.runFailureHooks(request, response, exceptionInstance);
+                throw exceptionInstance;
+            } catch (NoSuchMethodException e) {
+                throw new MalformedSdkException(e.getMessage());
+            } catch (IllegalAccessException e) {
+                throw new MalformedSdkException(e.getMessage());
+            } catch (InstantiationException e) {
+                throw new MalformedSdkException(e.getMessage());
+            } catch (InvocationTargetException e) {
+                throw new MalformedSdkException(e.getMessage());
+            }
         } else {
             // Else run the success hooks and returns the response formatted accordingly as the action defines
             this.runSuccessHooks(request, response);
@@ -313,8 +349,8 @@ public abstract class Action {
 
     public Action(ApiContext ctx) {
         this.ctx = ctx;
-        this.routeParameters = new HashMap<>();
-        this.queryParameters = new HashMap<>();
+        this.routeParameters = new HashMap();
+        this.queryParameters = new HashMap();
         this.requestBody = null;
     }
 }

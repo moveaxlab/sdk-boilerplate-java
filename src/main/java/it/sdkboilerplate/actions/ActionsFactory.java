@@ -1,10 +1,11 @@
 package it.sdkboilerplate.actions;
 
+import it.sdkboilerplate.exceptions.MalformedActionException;
 import it.sdkboilerplate.exceptions.UndefinedActionException;
 import it.sdkboilerplate.lib.ApiContext;
 
-
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 /**
@@ -27,19 +28,27 @@ public abstract class ActionsFactory {
      *
      * @param namespace Namespace of the action to be constructed
      * @return An Action's subclass instance
-     * @throws UndefinedActionException     if the namespace is not defined
-     * @throws ReflectiveOperationException if the action subclass is malformed
+     * @throws UndefinedActionException if the namespace is not defined
      */
-    public Action make(String namespace) throws UndefinedActionException, ReflectiveOperationException {
+    public Action make(String namespace) throws UndefinedActionException {
         HashMap<String, Class<? extends Action>> actions = getActions();
         // If the namespace is not defined throw an exception
         if (actions.containsKey(namespace)) {
-            // Otherwise get the action class related to the given namespace and its constructor(ApiContext)
-            // and return a new instance with the factory api context
-            Class<? extends Action> actionClass = actions.get(namespace);
-            Constructor<? extends Action> constructor = actionClass.getConstructor(ApiContext.class);
-            return constructor.newInstance(ctx);
-
+            try {
+                // Otherwise get the action class related to the given namespace and its constructor(ApiContext)
+                // and return a new instance with the factory api context
+                Class<? extends Action> actionClass = actions.get(namespace);
+                Constructor<? extends Action> constructor = actionClass.getConstructor(ApiContext.class);
+                return constructor.newInstance(ctx);
+            } catch (NoSuchMethodException e) {
+                throw new MalformedActionException(e.getMessage());
+            } catch (IllegalAccessException e) {
+                throw new MalformedActionException(e.getMessage());
+            } catch (InstantiationException e) {
+                throw new MalformedActionException(e.getMessage());
+            } catch (InvocationTargetException e) {
+                throw new MalformedActionException(e.getMessage());
+            }
         } else {
             throw new UndefinedActionException();
         }

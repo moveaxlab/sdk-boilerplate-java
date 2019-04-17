@@ -44,7 +44,7 @@ public class TestRetrieveUserAction extends TestAction {
 
     @Override
     public HashMap<String, Class<? extends SdkHttpException>> getErrors() {
-        HashMap<String, Class<? extends SdkHttpException>> errors = new HashMap<>();
+        HashMap<String, Class<? extends SdkHttpException>> errors = new HashMap();
         errors.put("404", NotFoundException.class);
         return errors;
     }

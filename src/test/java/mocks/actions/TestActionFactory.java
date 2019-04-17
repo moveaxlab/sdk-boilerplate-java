@@ -10,7 +10,7 @@ public class TestActionFactory extends ActionsFactory {
 
     @Override
     public HashMap<String, Class<? extends Action>> getActions() {
-        HashMap<String, Class<? extends Action>> actions = new HashMap<>();
+        HashMap<String, Class<? extends Action>> actions = new HashMap();
         actions.put("testUserRetrieval", TestRetrieveUserAction.class);
         actions.put("testUserCreation", TestCreateUserAction.class);
         return actions;
