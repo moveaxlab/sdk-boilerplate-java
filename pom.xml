@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>it.moveax.sdkboilerplate</groupId>
-    <artifactId>sdk-boilerplate-java6</artifactId>
+    <artifactId>sdk-boilerplate-java7</artifactId>
     <version>1.0.0</version>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -78,7 +78,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version> <!-- find the latest version at http://maven.apache.org/plugins/maven-enforcer-plugin/ -->
+                <version>1.4.1
+                </version> <!-- find the latest version at http://maven.apache.org/plugins/maven-enforcer-plugin/ -->
                 <executions>
                     <execution>
                         <id>enforce-bytecode-version</id>
@@ -88,7 +89,7 @@
                         <configuration>
                             <rules>
                                 <enforceBytecodeVersion>
-                                    <maxJdkVersion>1.6</maxJdkVersion>
+                                    <maxJdkVersion>1.7</maxJdkVersion>
                                     <excludes>
                                         <exclude>org.mindrot:jbcrypt</exclude>
                                     </excludes>
@@ -110,11 +111,11 @@
     </build>
 
     <properties>
-        <java.version>6</java.version>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.compiler.testSource>1.6</maven.compiler.testSource>
-        <maven.compiler.testTarget>1.6</maven.compiler.testTarget>
+        <java.version>7</java.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.testSource>1.7</maven.compiler.testSource>
+        <maven.compiler.testTarget>1.7</maven.compiler.testTarget>
     </properties>
     <dependencies>
         <dependency>
