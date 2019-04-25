@@ -4,11 +4,16 @@ import it.sdkboilerplate.cache.CacheAdapter;
 import it.sdkboilerplate.exceptions.ConfigurationException;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class ApiContext {
     private String hostname;
     private HashMap<String, Object> config;
     private CacheAdapter cache;
+    private final static HashSet validProtocols = new HashSet<String>() {{
+        add("http");
+        add("https");
+    }};
 
     public String getHostname() {
         return this.hostname;
@@ -29,9 +34,28 @@ public class ApiContext {
         if (this.config.get("timeout") == null || this.config.get("verifySSL") == null || this.config.get("mode") == null) {
             throw new ConfigurationException();
         }
+        if (this.config.containsKey("proxy")) {
+            HashMap<String, Object> proxyConfiguration = (HashMap) this.config.get("proxy");
+            if (!(proxyConfiguration.get("hostname") instanceof String))
+                throw new ConfigurationException("Proxy ip address invalid");
+            if (!(proxyConfiguration.get("port") instanceof Integer))
+                throw new ConfigurationException("Proxy port invalid (must be an integer)");
+            if (!(proxyConfiguration.get("protocol") instanceof String) || !(this.validateProxyProtocol(proxyConfiguration.get("protocol").toString())))
+                throw new ConfigurationException("Proxy protocol is invalid, valid protocols are " + validProtocols.toString());
+            if (proxyConfiguration.containsKey("credentials") && !(this.validateProxyCredentials((HashMap) proxyConfiguration.get("credentials"))))
+                throw new ConfigurationException("Invalid credentials, specify user and password");
+        }
     }
 
     public CacheAdapter getCache() {
         return this.cache;
+    }
+
+    private boolean validateProxyProtocol(String protocol) {
+        return validProtocols.contains(protocol);
+    }
+
+    private boolean validateProxyCredentials(HashMap credentials) {
+        return credentials.containsKey("user") && credentials.containsKey("password");
     }
 }

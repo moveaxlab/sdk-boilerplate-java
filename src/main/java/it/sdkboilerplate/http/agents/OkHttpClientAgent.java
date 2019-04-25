@@ -4,12 +4,13 @@ import it.sdkboilerplate.exceptions.*;
 import it.sdkboilerplate.http.Headers;
 import it.sdkboilerplate.http.SdkRequest;
 import it.sdkboilerplate.http.SdkResponse;
-
 import okhttp3.*;
+import okhttp3.internal.tls.OkHostnameVerifier;
 
 import javax.net.ssl.*;
 import java.io.IOException;
-
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -33,9 +34,12 @@ public class OkHttpClientAgent extends UserAgent {
                 .connectTimeout((int) this.config.get("timeout"), TimeUnit.SECONDS)
                 .writeTimeout((int) this.config.get("timeout"), TimeUnit.SECONDS)
                 .readTimeout((int) this.config.get("timeout"), TimeUnit.SECONDS);
+
         if (!(boolean) this.config.get("verifySSL")) {
             builder = this.setupUnverifiedRequests(builder);
         }
+        if (this.isProxyRequest())
+            builder = this.setRequestProxy(builder);
         OkHttpClient client = builder.build();
 
         try {
@@ -55,7 +59,6 @@ public class OkHttpClientAgent extends UserAgent {
     }
 
     private OkHttpClient.Builder setupUnverifiedRequests(OkHttpClient.Builder builder) throws SdkException {
-
         try {
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
@@ -138,6 +141,37 @@ public class OkHttpClientAgent extends UserAgent {
         }
     }
 
+    private OkHttpClient.Builder setRequestProxy(OkHttpClient.Builder builder) {
+        Proxy proxy = new Proxy(this.getProxyType(), new InetSocketAddress((String) this.getProxyConfig().get("hostname"), (int) this.getProxyConfig().get("port")));
+        builder.proxy(proxy);
+        if (this.isProxyAuthenticated()) {
+            Authenticator proxyAuthenticator = new Authenticator() {
+                @Override
+                public Request authenticate(Route route, Response response) throws IOException {
+                    HashMap proxyCredentials = OkHttpClientAgent.this.getProxyCredentials();
+                    String credential = Credentials.basic((String) proxyCredentials.get("user"), (String) proxyCredentials.get("password"));
+                    return response.request().newBuilder()
+                            .header("Proxy-Authorization", credential)
+                            .build();
+                }
+            };
+            builder.proxyAuthenticator(proxyAuthenticator);
+        }
+        return builder;
+    }
+
+    private Proxy.Type getProxyType() {
+        String protocol = (String) this.getProxyConfig().get("protocol");
+        switch (protocol) {
+            case "http":
+                return Proxy.Type.HTTP;
+            case "https":
+                return Proxy.Type.HTTP;
+            default:
+                throw new UnknownProxyTypeException();
+        }
+    }
+
     private RequestBody getBody(SdkRequest sdkRequest) throws UnknownContentTypeException {
         String contentTypeHeader = sdkRequest.getHeaders().get(Headers.CONTENT_TYPE);
         String requestBody = sdkRequest.getBody();
@@ -161,5 +195,21 @@ public class OkHttpClientAgent extends UserAgent {
         }
         return sdkResponseHeaders;
 
+    }
+
+    private boolean isProxyRequest() {
+        return this.config.containsKey("proxy");
+    }
+
+    private HashMap<String, Object> getProxyConfig() {
+        return (HashMap<String, Object>) this.config.get("proxy");
+    }
+
+    private boolean isProxyAuthenticated() {
+        return this.getProxyConfig().containsKey("credentials");
+    }
+
+    private HashMap<String, String> getProxyCredentials() {
+        return (HashMap) this.getProxyConfig().get("credentials");
     }
 }
