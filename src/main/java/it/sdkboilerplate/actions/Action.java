@@ -23,6 +23,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Abstract Action class. Subclasses must defines getters for elements which will be used to
@@ -232,7 +233,7 @@ public abstract class Action {
         }
     }
 
-    private void runFailureHooks(SdkRequest request, SdkResponse response, SdkException exception) throws SdkException {
+    private void runFailureHooks(SdkRequest request, SdkResponse response, SdkHttpException exception) throws SdkException {
         try {
             ArrayList<Hook> hooks = new ArrayList<>();
             for (Class<? extends FailureHook> failureHookClass : this.getFailureHooks()) {
@@ -240,7 +241,7 @@ public abstract class Action {
                         ApiContext.class,
                         SdkRequest.class,
                         SdkResponse.class,
-                        SdkException.class);
+                        SdkHttpException.class);
                 hooks.add(hookConstructor.newInstance(this.ctx, request, response, exception));
             }
             this.runHooks(hooks);
@@ -297,18 +298,64 @@ public abstract class Action {
         SdkResponse response = agent.send(request);
 
         if (response.isFailed()) {
-            // If the response has a status code not in 200-299, runs the failure hooks and throws the appropriate defined exception
-            Class<? extends SdkHttpException> exceptionClass = this.getException(response);
-            SdkHttpException exceptionInstance = exceptionClass.getConstructor().newInstance();
-            // Run the failure hooks and throw the exception
-            this.runFailureHooks(request, response, exceptionInstance);
-            throw exceptionInstance;
+            String debugInfo = this.buildDebugInfo(request, response);
+            try {
+                // If the response has a status code not in 200-299, runs the failure hooks and throws the appropriate defined exception
+                Class<? extends SdkHttpException> exceptionClass = this.getException(response);
+                SdkHttpException exceptionInstance = exceptionClass.getConstructor().newInstance();
+                exceptionInstance.setDebugInfo(debugInfo);
+                // Run the failure hooks and throw the exception
+                this.runFailureHooks(request, response, exceptionInstance);
+                throw exceptionInstance;
+            } catch (UnknownHttpException e) {
+                e.setDebugInfo(debugInfo);
+                throw e;
+            }
         } else {
             // Else run the success hooks and returns the response formatted accordingly as the action defines
             this.runSuccessHooks(request, response);
             Class<? extends SdkBodyType> responseBodyClass = this.getResponseBodyClass();
             return response.format(responseBodyClass);
         }
+    }
+
+    private String buildDebugInfo(SdkRequest request, SdkResponse response) throws SdkException {
+        return new StringBuilder().append("Request\n\n")
+                .append("    Route: ")
+                .append(request.getRoute())
+                .append("\n")
+                .append("    Headers: \n")
+                .append(this.hashMapToInfo(request.getHeaders()))
+                .append("    Body: \n")
+                .append("        ")
+                .append(this.serializeRequestBody())
+                .append("\n")
+                .append("    Query Parameters:\n")
+                .append(this.hashMapToInfo(request.getQueryParameters()))
+                .append("\n\n")
+                .append("Response: \n")
+                .append("    Headers: \n")
+                .append(this.hashMapToInfo(response.getHeaders()))
+                .append("    Status: ")
+                .append(response.getStatusCode())
+                .append("\n")
+                .append("    Body: \n")
+                .append("        ")
+                .append(response.getRawBody())
+                .append("\n")
+                .toString();
+    }
+
+    private String hashMapToInfo(HashMap<String, String> map) {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry entry : map.entrySet()) {
+            builder.append("        ")
+                    .append(entry.getKey())
+                    .append("  :")
+                    .append(entry.getValue())
+                    .append("\n");
+        }
+        return builder.toString();
     }
 
     public Action(ApiContext ctx) {

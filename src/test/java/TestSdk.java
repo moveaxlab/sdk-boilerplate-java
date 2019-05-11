@@ -9,15 +9,11 @@ import it.sdkboilerplate.lib.ApiContext;
 import it.sdkboilerplate.lib.FormSerializer;
 import it.sdkboilerplate.lib.JsonDeserializer;
 import it.sdkboilerplate.lib.JsonSerializer;
-
-
 import mocks.actions.TestActionFactory;
 import mocks.actions.TestCreateUserAction;
 import mocks.actions.TestRetrieveUserAction;
 import mocks.exceptions.ValidationException;
-
 import mocks.objects.*;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.junit.Assert;
@@ -324,8 +320,6 @@ public class TestSdk {
         PowerMockito.verifyPrivate(mockAgent, times(1)).invoke("setHeaders", any(SdkRequest.class), any(Request.Builder.class));
         PowerMockito.verifyPrivate(mockAgent, times(1)).invoke("setUri", any(SdkRequest.class), any(Request.Builder.class));
         PowerMockito.verifyPrivate(mockAgent, times(1)).invoke("setMethod", any(SdkRequest.class), any(Request.Builder.class));
-
-
 
 
     }
